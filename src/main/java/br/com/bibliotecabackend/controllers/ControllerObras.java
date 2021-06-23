@@ -1,5 +1,7 @@
 package br.com.bibliotecabackend.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ public class ControllerObras {
 	
 	@PostMapping(value = "/salvarObras")
 	@ResponseBody
-	public ResponseEntity<Obras> salvar(@RequestBody Obras obras) {
+	public ResponseEntity<?> salvar(@RequestBody Obras obras) {
 		
 		Obras obra = repositoryObras.save(obras);
 		
@@ -31,8 +33,13 @@ public class ControllerObras {
 	}
 	
 	@GetMapping(value = "/listarObras")
+	@ResponseBody
 	public ResponseEntity<List<Obras>> getObras(){
-		return null;
+		
+		List<Obras> listaObras = repositoryObras.findAll();
+		
+		
+		return new ResponseEntity<List<Obras>>(listaObras, HttpStatus.OK);
 	}
 	
 }
