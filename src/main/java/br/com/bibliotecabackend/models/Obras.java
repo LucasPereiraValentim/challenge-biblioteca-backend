@@ -9,16 +9,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 
 
 @Entity
+@SequenceGenerator(name = "seq_obras", sequenceName = "seq_obras", allocationSize = 1, initialValue = 1)
 public class Obras implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_obras")
 	private Long id;
 	
 	private String titulo;
@@ -28,16 +30,14 @@ public class Obras implements Serializable{
 	@Column(columnDefinition = "text")
 	private String foto;
 	
-	@OneToMany(mappedBy = "obras")
-	private List<Autor> autores;
+	private String autor;
 	
-	
-	public List<Autor> getAutores() {
-		return autores;
+	public String getAutor() {
+		return autor;
 	}
 
-	public void setAutores(List<Autor> autores) {
-		this.autores = autores;
+	public void setAutor(String autor) {
+		this.autor = autor;
 	}
 
 	public Long getId() {
