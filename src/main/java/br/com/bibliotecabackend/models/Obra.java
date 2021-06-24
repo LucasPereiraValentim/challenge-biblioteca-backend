@@ -3,11 +3,13 @@ package br.com.bibliotecabackend.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -15,7 +17,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name = "seq_obras", sequenceName = "seq_obras", allocationSize = 1, initialValue = 1)
-public class Obras implements Serializable{
+public class Obra implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,17 +29,16 @@ public class Obras implements Serializable{
 	
 	private String editora;
 	
-	@Column(columnDefinition = "text")
 	private String foto;
 	
 	private String autor;
 	
-	public String getAutor() {
-		return autor;
-	}
-
 	public void setAutor(String autor) {
 		this.autor = autor;
+	}
+	
+	public String getAutor() {
+		return autor;
 	}
 
 	public Long getId() {

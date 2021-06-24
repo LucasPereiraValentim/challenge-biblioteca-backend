@@ -5,13 +5,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.bibliotecabackend.models.Obras;
+import br.com.bibliotecabackend.models.Obra;
 
 @Repository
-public interface RepositoryObras extends JpaRepository<Obras, Long>{
+public interface RepositoryObra extends JpaRepository<Obra, Long>{
 	
-	@Query(value = "select o from Obras o where o.titulo = :obra")
-	public boolean verificarObras(@Param("obra") String obra);
+	@Query(value = "SELECT CASE WHEN COUNT(o) > 0 THEN true ELSE false END FROM Obra o WHERE o.titulo = :titulo")
+	boolean verificarTitulo(@Param("titulo") String titulo);
 	
 	
 }
