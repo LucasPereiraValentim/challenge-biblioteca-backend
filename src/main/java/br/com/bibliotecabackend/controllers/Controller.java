@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,15 +49,26 @@ public class Controller {
 		return new ResponseEntity<List<Obra>>(listaObras, HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/atualizarObra")
-	@ResponseBody
-	public ResponseEntity<String> atualizar(@RequestBody Obra obra){
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<String> atualizar(@PathVariable Long id, @RequestBody Obra obra){
 		
-		if (obra.getId() != null){
-			repositoryObra.saveAndFlush(obra);
-			return new ResponseEntity<String>("Atualizado com sucesso", HttpStatus.OK);
-		}	
-		return new ResponseEntity<String>("Não foi possível atualizar", HttpStatus.OK);
+		if (id != null) {
+			Obra obraPesquisada = repositoryObra.findById(id).get();
+			
+			obraPesquisada.setTitulo(obra.getTitulo());
+			obraPesquisada.setEditora(obra.getEditora());
+			obraPesquisada.setFoto(obra.getFoto());
+			
+			for (int i = 0; i < obra.getAutores().size(); i++) {
+				obraPesquisada.getAutores().get(i).setObra(obraPesquisada);
+				
+			}
+			repositoryObra.save(obraPesquisada);
+			return new ResponseEntity<String>("Atualizado com sucesso!", HttpStatus.OK);
+		}
+		
+		
+		return new ResponseEntity<String>("Não foi possível atualizar", HttpStatus.NOT_FOUND);
 	}
 	
 	@DeleteMapping(value = "excluirObra")
