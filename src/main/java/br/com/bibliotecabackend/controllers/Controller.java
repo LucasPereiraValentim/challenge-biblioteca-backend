@@ -38,7 +38,7 @@ public class Controller {
 		return new ResponseEntity<String>("Esta obra já está cadastrada", HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/")
+	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<List<Obra>> getObras(){
 		
 		List<Obra> listaObras = repositoryObra.findAll();
@@ -46,7 +46,7 @@ public class Controller {
 		return new ResponseEntity<List<Obra>>(listaObras, HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "/{id}", produces = "application/text")
 	public ResponseEntity<String> atualizar(@PathVariable Long id, @RequestBody Obra obra){
 		
 		if (id != null) {
@@ -68,7 +68,7 @@ public class Controller {
 		return new ResponseEntity<String>("Não foi possível atualizar", HttpStatus.NOT_FOUND);
 	}
 	
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/{id}", produces = "application/text")
 	public ResponseEntity<String> excluir(@PathVariable Long id){
 		
 		if (id != null) {
