@@ -1,15 +1,14 @@
 package br.com.bibliotecabackend.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -30,16 +29,21 @@ public class Obra implements Serializable{
 	private String editora;
 	
 	private String foto;
+
 	
-	private String autor;
+	@OneToMany(mappedBy = "obra", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Autor> autores = new ArrayList<Autor>();
 	
-	public void setAutor(String autor) {
-		this.autor = autor;
+	
+	
+	public List<Autor> getAutores() {
+		return autores;
 	}
-	
-	public String getAutor() {
-		return autor;
+
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
 	}
+
 
 	public Long getId() {
 		return id;

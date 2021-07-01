@@ -20,17 +20,19 @@ import br.com.bibliotecabackend.models.Obra;
 import br.com.bibliotecabackend.repositories.RepositoryObra;
 
 @RestController
-@RequestMapping(value = "/obra")
-public class ControllerObra {
+@RequestMapping(value = "/obras")
+public class Controller {
 	
 	@Autowired
 	RepositoryObra repositoryObra;
 	
-	@PostMapping(value = "/salvarObra")
-	@ResponseBody
+	@PostMapping(produces = "application/text")
 	public ResponseEntity<String> salvar(@RequestBody Obra obra) {
 		
 		if (!repositoryObra.verificarTitulo(obra.getTitulo())) {
+			for (int i = 0; i < obra.getAutores().size(); i++) {
+				obra.getAutores().get(i).setObra(obra);
+			}
 			repositoryObra.save(obra);
 			return new ResponseEntity<String>("Obra salva com sucesso", HttpStatus.CREATED);	
 		}
