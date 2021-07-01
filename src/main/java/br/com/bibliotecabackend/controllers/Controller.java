@@ -40,8 +40,7 @@ public class Controller {
 		return new ResponseEntity<String>("Esta obra já está cadastrada", HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/listarObras")
-	@ResponseBody
+	@GetMapping(value = "/")
 	public ResponseEntity<List<Obra>> getObras(){
 		
 		List<Obra> listaObras = repositoryObra.findAll();
