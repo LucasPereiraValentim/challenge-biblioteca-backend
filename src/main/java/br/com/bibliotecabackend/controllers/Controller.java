@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.com.bibliotecabackend.models.Obra;
 import br.com.bibliotecabackend.repositories.RepositoryObra;
@@ -71,13 +68,16 @@ public class Controller {
 		return new ResponseEntity<String>("Não foi possível atualizar", HttpStatus.NOT_FOUND);
 	}
 	
-	@DeleteMapping(value = "excluirObra")
-	@ResponseBody
-	public ResponseEntity<String> excluir(@RequestParam Long id){
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<String> excluir(@PathVariable Long id){
 		
-		repositoryObra.deleteById(id);
+		if (id != null) {
+			repositoryObra.deleteById(id);
+			return new ResponseEntity<String>("Excluido com sucesso!", HttpStatus.OK);
+		}
 		
-		return new ResponseEntity<String>("Excluido com sucesso!", HttpStatus.OK);
+		return new ResponseEntity<String>("Não foi possível atualizar", HttpStatus.NOT_FOUND);
+		
 	}
 	
 }
