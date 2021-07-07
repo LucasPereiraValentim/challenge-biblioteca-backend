@@ -27,12 +27,14 @@ public class Controller {
 	@PostMapping(produces = "application/text")
 	public ResponseEntity<String> salvar(@RequestBody Obra obra) {
 		
-		if (!repositoryObra.verificarTitulo(obra.getTitulo())) {
-			for (int i = 0; i < obra.getAutores().size(); i++) {
-				obra.getAutores().get(i).setObra(obra);
+		if (obra.getId() == null) {
+			if (!repositoryObra.verificarTitulo(obra.getTitulo())) {
+				for (int i = 0; i < obra.getAutores().size(); i++) {
+					obra.getAutores().get(i).setObra(obra);
+				}
+				repositoryObra.save(obra);
+				return new ResponseEntity<String>("Obra salva com sucesso", HttpStatus.CREATED);	
 			}
-			repositoryObra.save(obra);
-			return new ResponseEntity<String>("Obra salva com sucesso", HttpStatus.CREATED);	
 		}
 		
 		return new ResponseEntity<String>("Esta obra já está cadastrada", HttpStatus.OK);
@@ -43,15 +45,19 @@ public class Controller {
 		
 		List<Obra> listaObras = repositoryObra.findAll();
 		
-		return new ResponseEntity<List<Obra>>(listaObras, HttpStatus.OK);
+		if (listaObras.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<List<Obra>>(listaObras, HttpStatus.OK);
+		}
 	}
 	
 	@PutMapping(value = "/{id}", produces = "application/text")
 	public ResponseEntity<String> atualizar(@PathVariable Long id, @RequestBody Obra obra){
 		
+		Obra obraPesquisada = repositoryObra.findById(id).get();
+		
 		if (id != null) {
-			Obra obraPesquisada = repositoryObra.findById(id).get();
-			
 			obraPesquisada.setTitulo(obra.getTitulo());
 			obraPesquisada.setEditora(obra.getEditora());
 			obraPesquisada.setFoto(obra.getFoto());
@@ -62,6 +68,7 @@ public class Controller {
 			}
 			repositoryObra.save(obraPesquisada);
 			return new ResponseEntity<String>("Atualizado com sucesso!", HttpStatus.OK);
+			
 		}
 		
 		
