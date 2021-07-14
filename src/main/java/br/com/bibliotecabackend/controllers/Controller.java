@@ -3,6 +3,10 @@ package br.com.bibliotecabackend.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,23 +45,22 @@ public class Controller {
 	}
 	
 	@GetMapping(value = "/", produces = "application/json")
-	public ResponseEntity<List<Obra>> getObras(){
+	public ResponseEntity<Page<Obra>> getObras(@PageableDefault(page = 0, size = 5, sort = "titulo", direction = Direction.ASC) Pageable pageable){
 		
-		List<Obra> listaObras = repositoryObra.findAll();
+		Page<Obra> listaObras = repositoryObra.findAll(pageable);
 		
 		if (listaObras.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<List<Obra>>(listaObras, HttpStatus.OK);
+			return new ResponseEntity<Page<Obra>>(listaObras, HttpStatus.OK);
 		}
 	}
 	
 	@PutMapping(value = "/{id}", produces = "application/text")
 	public ResponseEntity<String> atualizar(@PathVariable Long id, @RequestBody Obra obra){
 		
-		Obra obraPesquisada = repositoryObra.findById(id).get();
-		
 		if (id != null) {
+			Obra obraPesquisada = repositoryObra.findById(id).get();
 			obraPesquisada.setTitulo(obra.getTitulo());
 			obraPesquisada.setEditora(obra.getEditora());
 			obraPesquisada.setFoto(obra.getFoto());
