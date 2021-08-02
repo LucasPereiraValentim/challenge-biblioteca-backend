@@ -52,6 +52,7 @@ public class Controller {
 		if (listaObras.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} else {
+			listaObras.forEach(obra -> System.out.println(obra));
 			return new ResponseEntity<Page<Obra>>(listaObras, HttpStatus.OK);
 		}
 	}
