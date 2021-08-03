@@ -46,9 +46,8 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 4 - Compartilhe seu resultado com a comunidade! #devchallenge
 
 # Novas features
-1 - Adicionado camadas de para implementação de sistema de Login.<br>
-2 - Adicionado camadas para implementação do Spring Security.<br>
-3 - Adicionado JWT para realizar autenticação através de TOKEN.<br>
+1 - Adicionado camadas para implementação do Spring Security.<br>
+2 - Adicionado JWT para realizar autenticação através de TOKEN.<br>
 
 
 # Compartilhe!
