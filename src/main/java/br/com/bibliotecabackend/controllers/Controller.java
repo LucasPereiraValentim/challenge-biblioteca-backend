@@ -90,4 +90,19 @@ public class Controller {
 		
 	}
 	
+	@GetMapping(value = "/obra/{id}", produces = "application/json")
+	public ResponseEntity<Obra> getObra(@PathVariable Long id){
+		
+		if (id != null) {
+			Obra obra = repositoryObra.findById(id).get();
+			if (obra != null) {
+				return new ResponseEntity<Obra>(obra, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 }
