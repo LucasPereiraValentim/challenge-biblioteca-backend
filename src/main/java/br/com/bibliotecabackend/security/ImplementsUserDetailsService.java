@@ -24,12 +24,12 @@ public class ImplementsUserDetailsService implements UserDetailsService{
 		
 		//Consulta no banco para realizar verificação para liberar acesso
 		
-		Usuario usuario = repositoryUsuario.verificarUsuario(username);
+		Usuario usuarioConsultado = repositoryUsuario.findByLogin(username);
 		
-		if (usuario == null) {
+		if (usuarioConsultado == null) {
 			throw new UsernameNotFoundException("Usuário não existe");
 		} else {
-			return new User(usuario.getLogin(), usuario.getSenha(), usuario.getAuthorities());
+			return new User(usuarioConsultado.getLogin(), usuarioConsultado.getSenha(), usuarioConsultado.getAuthorities());
 		}
 		
 		

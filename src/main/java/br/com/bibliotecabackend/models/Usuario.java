@@ -1,11 +1,18 @@
 package br.com.bibliotecabackend.models;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +31,15 @@ public class Usuario implements UserDetails{
 	private String login;
 	
 	private String senha;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "usuario_role", joinColumns = @JoinColumn(name = "usuario_id", 
+	referencedColumnName = "id", table = "usuario", unique = false, foreignKey = @ForeignKey(
+			name = "usuario_fk")), inverseJoinColumns = @JoinColumn(name = "role_id", 
+			referencedColumnName = "id", table = "role", unique = false, updatable = false,
+			foreignKey = @ForeignKey(name = "role_fk")))
+	private List<Role> roles = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -51,7 +67,7 @@ public class Usuario implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return this.roles;
 	}
 
 	@Override
