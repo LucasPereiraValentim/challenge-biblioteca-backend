@@ -45,6 +45,10 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 3 - Comece a codar! Sinta-se livre para utilizar o fluxo de trabalho que ache mais confortável<br>
 4 - Compartilhe seu resultado com a comunidade! #devchallenge
 
+# Novas features
+1 - Adicionado camadas para implementação do Spring Security.<br>
+2 - Adicionado JWT para realizar autenticação através de TOKEN.<br>
+
 
 # Compartilhe!
 Inicie seu projeto utilizando esse template no seu github como um repositório público<br>
