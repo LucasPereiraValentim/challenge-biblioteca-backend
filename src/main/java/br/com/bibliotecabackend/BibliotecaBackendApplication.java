@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableJpaRepositories(basePackages = {"br.com.bibliotecabackend.repositories"})
 @EnableTransactionManagement
 @RestController
-@EnableAutoConfiguration
 public class BibliotecaBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaBackendApplication.class, args);
-		System.out.println(new BCryptPasswordEncoder().encode("123"));
 	}
 
 }
