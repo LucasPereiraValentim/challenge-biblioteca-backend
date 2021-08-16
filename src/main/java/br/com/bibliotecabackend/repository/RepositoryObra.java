@@ -1,4 +1,4 @@
-package br.com.bibliotecabackend.repositories;
+package br.com.bibliotecabackend.repository;
 
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.bibliotecabackend.models.Obra;
+import br.com.bibliotecabackend.model.Obra;
 
 @Repository
 public interface RepositoryObra extends JpaRepository<Obra, Long>{

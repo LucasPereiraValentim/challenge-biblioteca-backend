@@ -1,4 +1,4 @@
-package br.com.bibliotecabackend.controllers;
+package br.com.bibliotecabackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bibliotecabackend.models.Obra;
-import br.com.bibliotecabackend.repositories.RepositoryObra;
+import br.com.bibliotecabackend.model.Obra;
+import br.com.bibliotecabackend.repository.RepositoryObra;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -104,5 +104,6 @@ public class Controller {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
 	
 }

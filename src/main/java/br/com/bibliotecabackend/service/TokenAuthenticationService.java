@@ -1,4 +1,4 @@
-package br.com.bibliotecabackend.security;
+package br.com.bibliotecabackend.service;
 
 import java.util.Collections;
 import java.util.Date;
@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-
+@Service
 public class TokenAuthenticationService {
 	
 	static final long EXPIRATION_TIME = 860_000_000;

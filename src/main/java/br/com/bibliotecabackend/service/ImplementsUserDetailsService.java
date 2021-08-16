@@ -1,4 +1,4 @@
-package br.com.bibliotecabackend.security;
+package br.com.bibliotecabackend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import br.com.bibliotecabackend.models.Usuario;
-import br.com.bibliotecabackend.repositories.RepositoryUsuario;
+import br.com.bibliotecabackend.model.Usuario;
+import br.com.bibliotecabackend.repository.RepositoryUsuario;
 
 @Service
 @Component

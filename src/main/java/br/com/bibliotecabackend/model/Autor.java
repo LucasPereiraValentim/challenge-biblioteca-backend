@@ -1,4 +1,4 @@
-package br.com.bibliotecabackend.models;
+package br.com.bibliotecabackend.model;
 
 import java.io.Serializable;
 
