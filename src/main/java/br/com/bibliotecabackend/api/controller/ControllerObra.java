@@ -1,5 +1,7 @@
 package br.com.bibliotecabackend.api.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,31 +19,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bibliotecabackend.api.dto.ObraDTO;
+import br.com.bibliotecabackend.api.input.ObraInput;
+import br.com.bibliotecabackend.api.mapper.ObraMapper;
 import br.com.bibliotecabackend.model.Obra;
 import br.com.bibliotecabackend.repository.RepositoryObra;
+import br.com.bibliotecabackend.service.ObraService;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/obras")
-public class Controller {
+public class ControllerObra {
 	
 	@Autowired
-	RepositoryObra repositoryObra;
+	private RepositoryObra repositoryObra;
 	
-	@PostMapping(produces = "application/text")
-	public ResponseEntity<String> salvar(@RequestBody Obra obra) {
+	@Autowired
+	private ObraService obraService;
+	
+	@Autowired
+	private ObraMapper obraMapper;
+	
+	@PostMapping
+	public ResponseEntity<ObraDTO> salvar(@Valid @RequestBody ObraInput obraInput) {
 		
-		if (obra.getId() == null) {
-			if (!repositoryObra.verificarTitulo(obra.getTitulo())) {
-				for (int i = 0; i < obra.getAutores().size(); i++) {
-					obra.getAutores().get(i).setObra(obra);
-				}
-				repositoryObra.save(obra);
-				return new ResponseEntity<String>("Obra salva com sucesso", HttpStatus.CREATED);	
-			}
-		}
+		Obra obraToEntidade = obraMapper.toEntidade(obraInput);
 		
-		return new ResponseEntity<String>("Esta obra já está cadastrada", HttpStatus.OK);
+		Obra obraSalva = obraService.salvar(obraToEntidade);
+		
+		return new ResponseEntity<ObraDTO>(obraMapper.toObraDTO(obraSalva), HttpStatus.CREATED);
 	}
 	
 	@GetMapping(value = "/", produces = "application/json")
