@@ -1,4 +1,4 @@
-package br.com.bibliotecabackend.controller;
+package br.com.bibliotecabackend.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
