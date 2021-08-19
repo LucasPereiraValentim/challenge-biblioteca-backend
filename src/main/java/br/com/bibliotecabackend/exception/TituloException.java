@@ -1,10 +1,10 @@
 package br.com.bibliotecabackend.exception;
 
-public class ObraException extends RuntimeException{
+public class TituloException extends RuntimeException{
 	
 	private static final long serialVersionUID = 1L;
 	
-	public ObraException(String erro) {
+	public TituloException(String erro) {
 		super(erro);
 	}
 	

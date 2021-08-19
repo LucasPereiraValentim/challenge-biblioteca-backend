@@ -35,8 +35,6 @@ public class TokenAuthenticationService {
 		//Add no cabeçalho do HTTP
 		response.addHeader(HEADER_STRING, token);
 		
-		//Retorna o TOKEN ao cliente
-		response.getWriter().write("{\"Authorization\": \"" + token + "\"}");
 	}
 	
 	
@@ -49,7 +47,7 @@ public class TokenAuthenticationService {
 		if (token != null) {
 			String usuarioToken = Jwts.parser()
 					.setSigningKey(SECRET)
-					.parseClaimsJws(token.replace(TOKEN_PREFIX, "")) //Retorna o TOKEN
+					.parseClaimsJws(token.replace(TOKEN_PREFIX, "").trim()) //Retorna o TOKEN
 					.getBody().getSubject();
 			
 			if (usuarioToken != null) {

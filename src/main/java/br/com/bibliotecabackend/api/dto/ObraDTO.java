@@ -1,5 +1,8 @@
 package br.com.bibliotecabackend.api.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ObraDTO {
 	
 	private Long id;
@@ -9,6 +12,16 @@ public class ObraDTO {
 	private String editora;
 	
 	private String foto;
+	
+	private List<AutorDTO> autores = new ArrayList<>();
+	
+	public List<AutorDTO> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(List<AutorDTO> autores) {
+		this.autores = autores;
+	}
 
 	public Long getId() {
 		return id;

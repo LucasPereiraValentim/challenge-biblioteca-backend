@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import br.com.bibliotecabackend.exception.RecursoNaoEncontrado;
+import br.com.bibliotecabackend.exception.TituloException;
+
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler{
 	
@@ -46,6 +49,32 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		erro.setCampos(camposlista);
 		
 		return super.handleExceptionInternal(ex, erro, headers, status, request);
+	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(TituloException.class)
+	public ResponseEntity<Object> handlerTitulo(TituloException e, WebRequest request){
+		
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		Erro erro = new Erro();
+		erro.setStatus(status.value());
+		erro.setDataHora(OffsetDateTime.now());
+		erro.setTitulo(e.getMessage());
+		
+		
+		return handleExceptionInternal(e, erro, new HttpHeaders(), status, request);
+	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(RecursoNaoEncontrado.class)
+	public ResponseEntity<Object> hanlerRecursoNaoEncontrado(RecursoNaoEncontrado e, WebRequest request){
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		
+		Erro erro = new Erro();
+		erro.setStatus(status.value());
+		erro.setDataHora(OffsetDateTime.now());
+		erro.setTitulo(e.getMessage());
+		
+		return handleExceptionInternal(e, erro, new HttpHeaders(), status, request);
 	}
 	
 }

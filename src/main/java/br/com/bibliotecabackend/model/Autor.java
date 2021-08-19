@@ -21,14 +21,13 @@ public class Autor implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_autor")
 	private Long id;
 	
-	private String nomeAutor;
+	private String nome;
 	
+	
+	@ManyToOne
 	@JsonIgnore
-	@ManyToOne(optional = false)
-	private Obra obra;
+	private Obra obra = new Obra();
 	
-	
-
 	public Long getId() {
 		return id;
 	}
@@ -38,11 +37,11 @@ public class Autor implements Serializable{
 	}
 
 	public String getNomeAutor() {
-		return nomeAutor;
+		return nome;
 	}
 
 	public void setNomeAutor(String nomeAutor) {
-		this.nomeAutor = nomeAutor;
+		this.nome = nomeAutor;
 	}
 
 	public Obra getObra() {

@@ -1,8 +1,12 @@
 package br.com.bibliotecabackend.api.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -50,19 +54,17 @@ public class ControllerObra {
 		return new ResponseEntity<ObraDTO>(obraMapper.toObraDTO(obraSalva), HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value = "/", produces = "application/json")
-	public ResponseEntity<Page<Obra>> getObras(@PageableDefault(page = 0, size = 5, sort = "titulo", direction = Direction.ASC) Pageable pageable){
+	@GetMapping(value = "/")
+	@CacheEvict(value = "cache-obras", allEntries = true)
+	@CachePut(value = "cache-obras")
+	public ResponseEntity<List<ObraDTO>> getObras(@PageableDefault(page = 0, size = 5, sort = "titulo", direction = Direction.ASC) Pageable pageable){
 		
-		Page<Obra> listaObras = repositoryObra.findAll(pageable);
+		Page<Obra> listaObras = obraService.getListaObra(pageable);
 		
-		if (listaObras.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} else {
-			return new ResponseEntity<Page<Obra>>(listaObras, HttpStatus.OK);
-		}
+		return new ResponseEntity<List<ObraDTO>>(obraMapper.toListDTO(listaObras), HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/{id}", produces = "application/text")
+	@PutMapping(value = "/{id}")
 	public ResponseEntity<String> atualizar(@PathVariable Long id, @RequestBody Obra obra){
 		
 		if (id != null) {
@@ -84,7 +86,7 @@ public class ControllerObra {
 		return new ResponseEntity<String>("Não foi possível atualizar", HttpStatus.NOT_FOUND);
 	}
 	
-	@DeleteMapping(value = "/{id}", produces = "application/text")
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<String> excluir(@PathVariable Long id){
 		
 		if (id != null) {
@@ -96,7 +98,7 @@ public class ControllerObra {
 		
 	}
 	
-	@GetMapping(value = "/obra/{id}", produces = "application/json")
+	@GetMapping(value = "/obra/{id}")
 	public ResponseEntity<Obra> getObra(@PathVariable Long id){
 		
 		if (id != null) {
