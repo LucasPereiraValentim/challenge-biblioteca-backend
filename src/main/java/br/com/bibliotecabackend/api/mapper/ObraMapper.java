@@ -14,31 +14,31 @@ import br.com.bibliotecabackend.model.Obra;
 
 @Component
 public class ObraMapper {
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	public ObraDTO toObraDTO(Obra obra) {
 		return modelMapper.map(obra, ObraDTO.class);
 	}
-	
+
 	public Obra toEntidade(ObraInput obraInput) {
 		return modelMapper.map(obraInput, Obra.class);
 	}
-	
-	public List<ObraDTO> toListDTO(Page<Obra> obras){
-		
+
+	public List<ObraDTO> toListDTO(Page<Obra> obras) {
+
 		List<Obra> listaObra = obras.getContent();
-		
+
 		List<ObraDTO> listaObraDTO = new ArrayList<>();
-		
+
 		for (Obra obra : listaObra) {
 			listaObraDTO.add(this.toObraDTO(obra));
-			
+
 		}
-		
+
 		return listaObraDTO;
-		
+
 	}
-	
+
 }

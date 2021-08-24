@@ -16,6 +16,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class TokenAuthenticationService {
 	
+	// TOKEN expira em 10 dias
 	static final long EXPIRATION_TIME = 860_000_000;
 	
 	static final String SECRET = "mySecret";
@@ -25,15 +26,15 @@ public class TokenAuthenticationService {
 	static final String HEADER_STRING = "Authorization";
 	
 	public void addAuthentication(HttpServletResponse response, String userName) throws Exception{
+		
 		String JWT = Jwts.builder()
 				.setSubject(userName)
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
 				.signWith(SignatureAlgorithm.HS512, SECRET).compact();
 		
-		String token = TOKEN_PREFIX + " " + JWT;
 		
 		//Add no cabeçalho do HTTP
-		response.addHeader(HEADER_STRING, token);
+		response.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
 		
 	}
 	
