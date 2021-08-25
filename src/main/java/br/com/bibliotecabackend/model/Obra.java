@@ -32,7 +32,7 @@ public class Obra implements Serializable{
 
 	
 	@OneToMany(mappedBy = "obra", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	private List<Autor> autores = new ArrayList<Autor>();
+	private List<Autor> autores = new ArrayList<>();
 	
 	
 	public List<Autor> getAutores() {
@@ -80,7 +80,6 @@ public class Obra implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((autores == null) ? 0 : autores.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -94,11 +93,6 @@ public class Obra implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Obra other = (Obra) obj;
-		if (autores == null) {
-			if (other.autores != null)
-				return false;
-		} else if (!autores.equals(other.autores))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -106,6 +100,7 @@ public class Obra implements Serializable{
 			return false;
 		return true;
 	}
+
 	
 	
 	

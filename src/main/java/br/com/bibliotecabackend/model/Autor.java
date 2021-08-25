@@ -27,30 +27,37 @@ public class Autor implements Serializable{
 	@ManyToOne
 	@JsonIgnore
 	private Obra obra = new Obra();
-	
+
+
 	public Long getId() {
 		return id;
 	}
+
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getNomeAutor() {
+
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNomeAutor(String nomeAutor) {
-		this.nome = nomeAutor;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
 
 	public Obra getObra() {
 		return obra;
 	}
 
+
 	public void setObra(Obra obra) {
 		this.obra = obra;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -59,6 +66,7 @@ public class Autor implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -76,6 +84,10 @@ public class Autor implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
+	
+	
 	
 	
 }

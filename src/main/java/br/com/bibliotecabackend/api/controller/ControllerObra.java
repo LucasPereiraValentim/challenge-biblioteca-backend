@@ -64,26 +64,15 @@ public class ControllerObra {
 		return new ResponseEntity<List<ObraDTO>>(obraMapper.toListDTO(listaObras), HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<String> atualizar(@PathVariable Long id, @RequestBody Obra obra){
+	@PutMapping(value = "/{obraId}")
+	public ResponseEntity<ObraDTO> atualizar(@PathVariable Long obraId, @Valid @RequestBody ObraInput obraInput){
+		Obra obraToEntidade = obraMapper.toEntidade(obraInput);
 		
-		if (id != null) {
-			Obra obraPesquisada = repositoryObra.findById(id).get();
-			obraPesquisada.setTitulo(obra.getTitulo());
-			obraPesquisada.setEditora(obra.getEditora());
-			obraPesquisada.setFoto(obra.getFoto());
-			
-			for (int i = 0; i < obra.getAutores().size(); i++) {
-				obraPesquisada.getAutores().get(i).setObra(obraPesquisada);
-				
-			}
-			repositoryObra.save(obraPesquisada);
-			return new ResponseEntity<String>("Atualizado com sucesso!", HttpStatus.OK);
-			
-		}
+		Obra obraSalva = obraService.atualizar(obraId, obraToEntidade);
 		
+		ObraDTO obraDTO = obraMapper.toObraDTO(obraSalva);
 		
-		return new ResponseEntity<String>("Não foi possível atualizar", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ObraDTO>(obraDTO, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/{id}")
