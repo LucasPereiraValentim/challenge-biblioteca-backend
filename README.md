@@ -37,7 +37,14 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 
 
 # Techs: 
-- Tecnologia que preferir :)
+* Java 8
+* Spring Boot
+* Spring Security
+* Spring Data
+* Spring Validation
+* PostgreSQL
+* Model Mapper
+* Json Web Token(JWT)
 
 # Como começar:
 1 - Use esse template (clicando em Use this template) ou faça um fork deste repositório com o código inicial<br>
@@ -45,10 +52,12 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 3 - Comece a codar! Sinta-se livre para utilizar o fluxo de trabalho que ache mais confortável<br>
 4 - Compartilhe seu resultado com a comunidade! #devchallenge
 
-# Novas features
-1 - Adicionado camadas para implementação do Spring Security.<br>
-2 - Adicionado JWT para realizar autenticação através de TOKEN.<br>
 
+# Indo além do desafio 
+1 - Implementado camadas para implementação do Spring Security.<br>
+2 - Implementado JWT para realizar autenticação através de TOKEN.<br>
+3 - Implementação de novas rotas:<br>
+* <b>[GET] </b> /obras/{🆔} : A rota deverá obter uma única obra pelo seu 🆔<br><br>
 
 # Compartilhe!
 Inicie seu projeto utilizando esse template no seu github como um repositório público<br>
