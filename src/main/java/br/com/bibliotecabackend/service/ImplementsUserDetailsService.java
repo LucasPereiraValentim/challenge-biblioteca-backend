@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import br.com.bibliotecabackend.model.Usuario;
-import br.com.bibliotecabackend.repository.RepositoryUsuario;
+import br.com.bibliotecabackend.repository.UsuarioRepository;
 
 @Service
 @Component
 public class ImplementsUserDetailsService implements UserDetailsService{
 	
 	@Autowired
-	private RepositoryUsuario repositoryUsuario;
+	private UsuarioRepository usuarioRepository;
 	
 	
 	@Override
@@ -24,7 +24,7 @@ public class ImplementsUserDetailsService implements UserDetailsService{
 		
 		//Consulta no banco para realizar verificação para liberar acesso
 		
-		Usuario usuarioConsultado = repositoryUsuario.findByLogin(username);
+		Usuario usuarioConsultado = usuarioRepository.findByLogin(username);
 		
 		if (usuarioConsultado == null) {
 			throw new UsernameNotFoundException("Usuário não existe");

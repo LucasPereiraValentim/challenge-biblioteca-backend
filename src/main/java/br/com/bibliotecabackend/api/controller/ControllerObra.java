@@ -21,22 +21,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bibliotecabackend.api.dto.ObraDTO;
 import br.com.bibliotecabackend.api.input.ObraInput;
 import br.com.bibliotecabackend.api.mapper.ObraMapper;
 import br.com.bibliotecabackend.model.Obra;
-import br.com.bibliotecabackend.repository.RepositoryObra;
 import br.com.bibliotecabackend.service.ObraService;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/obras")
 public class ControllerObra {
-	
-	@Autowired
-	private RepositoryObra repositoryObra;
 	
 	@Autowired
 	private ObraService obraService;
@@ -75,31 +72,16 @@ public class ControllerObra {
 		return new ResponseEntity<ObraDTO>(obraDTO, HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<String> excluir(@PathVariable Long id){
-		
-		if (id != null) {
-			repositoryObra.deleteById(id);
-			return new ResponseEntity<String>("Excluido com sucesso!", HttpStatus.OK);
-		}
-		
-		return new ResponseEntity<String>("Não foi possível atualizar", HttpStatus.NOT_FOUND);
-		
+	@DeleteMapping(value = "/{obraId}")
+	@ResponseStatus(HttpStatus.OK)
+	public String excluir(@PathVariable Long obraId){
+		return obraService.excluir(obraId);
 	}
 	
-	@GetMapping(value = "/obra/{id}")
-	public ResponseEntity<Obra> getObra(@PathVariable Long id){
-		
-		if (id != null) {
-			Obra obra = repositoryObra.findById(id).get();
-			if (obra != null) {
-				return new ResponseEntity<Obra>(obra, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
-		} else {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
+	@GetMapping(value = "/{obraId}")
+	@ResponseStatus(HttpStatus.OK)
+	public Obra getObra(@PathVariable Long obraId){	
+		return obraService.obterObra(obraId);
 	}
 	
 	

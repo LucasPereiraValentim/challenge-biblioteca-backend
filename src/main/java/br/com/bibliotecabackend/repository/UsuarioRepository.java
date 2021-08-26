@@ -10,7 +10,7 @@ import br.com.bibliotecabackend.model.Usuario;
 
 @Repository
 @Component
-public interface RepositoryUsuario extends JpaRepository<Usuario, Long>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	@Query(value = "SELECT u FROM Usuario u WHERE u.login = :login")
 	Usuario findByLogin(@Param("login") String login);

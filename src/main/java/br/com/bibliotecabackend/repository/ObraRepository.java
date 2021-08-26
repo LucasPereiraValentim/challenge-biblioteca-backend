@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import br.com.bibliotecabackend.model.Obra;
 
 @Repository
-public interface RepositoryObra extends JpaRepository<Obra, Long>{
+public interface ObraRepository extends JpaRepository<Obra, Long>{
 	
 	@ReadOnlyProperty
 	@Query(value = "SELECT CASE WHEN COUNT(o) > 0 THEN true ELSE false END FROM Obra o WHERE o.titulo = :titulo")
