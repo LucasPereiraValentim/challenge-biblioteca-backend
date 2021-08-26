@@ -37,7 +37,14 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 
 
 # Techs: 
-- Tecnologia que preferir :)
+* Java 8
+* Spring Boot
+* Spring Security
+* Spring Data
+* Spring Validation
+* PostgreSQL
+* Model Mapper
+* Json Web Token(JWT)
 
 # Como começar:
 1 - Use esse template (clicando em Use this template) ou faça um fork deste repositório com o código inicial<br>
