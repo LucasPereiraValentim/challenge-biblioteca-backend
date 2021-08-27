@@ -1,5 +1,7 @@
 package br.com.bibliotecabackend.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +101,16 @@ public class ObraService {
 		}
 		
 		
+	}
+
+	public List<Obra> pesquisar(String titulo) {
+		
+		List<Obra> listaPesquisa = obraRepository.findLikeByTitulo(titulo);
+		
+		if (listaPesquisa.isEmpty()) {
+			throw new RecursoNaoEncontrado("Não existe itens para esta pesquisa");
+		}
+		return listaPesquisa;
 	}
 	
 	

@@ -80,11 +80,20 @@ public class ControllerObra {
 	
 	@GetMapping(value = "/{obraId}")
 	@ResponseStatus(HttpStatus.OK)
+	@CacheEvict(value = "cache-obra", allEntries = true)
+	@CachePut(value = "cache-obra")
 	public ObraDTO getObra(@PathVariable Long obraId){	
 		Obra obra = obraService.obterObra(obraId);
 		ObraDTO obraDTO = obraMapper.toObraDTO(obra);
 		return obraDTO;
 	}
 	
+	@GetMapping(value = "/pesquisa/{titulo}")
+	@CacheEvict(value = "cache-pesquisa", allEntries = true)
+	@CachePut(value = "cache-pesquisa")
+	public ResponseEntity<List<ObraDTO>> pesquisarPorTitulo(@PathVariable String titulo){
+		List<ObraDTO> listaPesquisada = obraMapper.toListDTO(obraService.pesquisar(titulo));
+		return new ResponseEntity<List<ObraDTO>>(listaPesquisada, HttpStatus.OK);
+	}
 	
 }

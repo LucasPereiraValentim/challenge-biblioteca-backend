@@ -40,5 +40,18 @@ public class ObraMapper {
 		return listaObraDTO;
 
 	}
+	
+	public List<ObraDTO> toListDTO(List<Obra> obras) {
+
+		List<ObraDTO> listaObraDTO = new ArrayList<>();
+
+		for (Obra obra : obras) {
+			listaObraDTO.add(this.toObraDTO(obra));
+
+		}
+
+		return listaObraDTO;
+
+	}
 
 }
