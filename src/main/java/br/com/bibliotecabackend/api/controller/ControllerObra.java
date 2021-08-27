@@ -80,8 +80,10 @@ public class ControllerObra {
 	
 	@GetMapping(value = "/{obraId}")
 	@ResponseStatus(HttpStatus.OK)
-	public Obra getObra(@PathVariable Long obraId){	
-		return obraService.obterObra(obraId);
+	public ObraDTO getObra(@PathVariable Long obraId){	
+		Obra obra = obraService.obterObra(obraId);
+		ObraDTO obraDTO = obraMapper.toObraDTO(obra);
+		return obraDTO;
 	}
 	
 	
