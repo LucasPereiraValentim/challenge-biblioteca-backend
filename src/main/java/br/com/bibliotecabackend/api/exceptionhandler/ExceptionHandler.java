@@ -52,7 +52,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 	}
 	
 	@org.springframework.web.bind.annotation.ExceptionHandler(TituloException.class)
-	protected ResponseEntity<Object> handlerTitulo(TituloException e, WebRequest request){
+	public ResponseEntity<Object> handlerTitulo(TituloException e, WebRequest request){
 		
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		
@@ -66,7 +66,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 	}
 	
 	@org.springframework.web.bind.annotation.ExceptionHandler(RecursoNaoEncontrado.class)
-	protected ResponseEntity<Object> hanlerRecursoNaoEncontrado(RecursoNaoEncontrado e, WebRequest request){
+	public ResponseEntity<Object> hanlerRecursoNaoEncontrado(RecursoNaoEncontrado e, WebRequest request){
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		
 		Erro erro = new Erro();
@@ -75,6 +75,8 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		erro.setTitulo(e.getMessage());
 		
 		return handleExceptionInternal(e, erro, new HttpHeaders(), status, request);
-	}
+	}	
+	
+	
 	
 }
