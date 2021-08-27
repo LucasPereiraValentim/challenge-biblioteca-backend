@@ -59,7 +59,7 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 3 - Implementado cache para os métodos com o verbo http [GET].<br>
 4 - Implementação de novas rotas:<br>
 * <b>[GET] </b> /obras/{🆔} : A rota deverá obter uma única obra pelo seu 🆔<br><br>
-* <b>[GET] </b> /obras/pesquisa/{titulo} : A rota deverá realizar uma pesquisa pele o titulo da obra.<br><br>
+* <b>[GET] </b> /obras/pesquisa/{titulo} : A rota deverá realizar uma pesquisa pelo titulo da obra.<br><br>
 
 # Compartilhe!
 Inicie seu projeto utilizando esse template no seu github como um repositório público<br>
