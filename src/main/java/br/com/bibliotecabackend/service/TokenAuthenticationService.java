@@ -56,6 +56,7 @@ public class TokenAuthenticationService {
 
 		} catch (io.jsonwebtoken.ExpiredJwtException e) {
 			response.getOutputStream().println("Seu token expirou");
+			e.printStackTrace();
 		}
 
 		return null;

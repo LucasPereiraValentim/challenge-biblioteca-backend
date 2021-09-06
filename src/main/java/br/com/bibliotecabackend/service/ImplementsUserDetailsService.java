@@ -13,26 +13,22 @@ import br.com.bibliotecabackend.repository.UsuarioRepository;
 
 @Service
 @Component
-public class ImplementsUserDetailsService implements UserDetailsService{
-	
+public class ImplementsUserDetailsService implements UserDetailsService {
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		//Consulta no banco para realizar verificação para liberar acesso
-		
+
+		// Realiza uma verificação no banco para liberar acesso
+
 		Usuario usuarioConsultado = usuarioRepository.findByLogin(username);
-		
+
 		if (usuarioConsultado == null) {
 			throw new UsernameNotFoundException("Usuário não existe");
-		} else {
-			return new User(usuarioConsultado.getLogin(), usuarioConsultado.getSenha(), usuarioConsultado.getAuthorities());
 		}
-		
-		
+		return new User(usuarioConsultado.getLogin(), usuarioConsultado.getSenha(), usuarioConsultado.getAuthorities());
 	}
 
 }

@@ -33,7 +33,7 @@ import br.com.bibliotecabackend.service.ObraService;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/obras")
-public class ControllerObra {
+public class ObraController {
 	
 	@Autowired
 	private ObraService obraService;
