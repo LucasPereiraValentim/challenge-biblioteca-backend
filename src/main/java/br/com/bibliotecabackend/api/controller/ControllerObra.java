@@ -44,11 +44,11 @@ public class ControllerObra {
 	@PostMapping
 	public ResponseEntity<ObraDTO> salvar(@Valid @RequestBody ObraInput obraInput) {
 		
-		Obra obraToEntidade = obraMapper.toEntidade(obraInput);
+		Obra obraToEntidade = this.obraMapper.toEntidade(obraInput);
 		
-		Obra obraSalva = obraService.salvar(obraToEntidade);
+		Obra obraSalva = this.obraService.salvar(obraToEntidade);
 		
-		return new ResponseEntity<ObraDTO>(obraMapper.toObraDTO(obraSalva), HttpStatus.CREATED);
+		return new ResponseEntity<ObraDTO>(this.obraMapper.toObraDTO(obraSalva), HttpStatus.CREATED);
 	}
 	
 	@GetMapping(value = "/")
@@ -56,7 +56,7 @@ public class ControllerObra {
 	@CachePut(value = "cache-obras")
 	public ResponseEntity<List<ObraDTO>> getObras(@PageableDefault(page = 0, size = 5, sort = "titulo", direction = Direction.ASC) Pageable pageable){
 		
-		Page<Obra> listaObras = obraService.getListaObra(pageable);
+		Page<Obra> listaObras = this.obraService.getListaObra(pageable);
 		
 		return new ResponseEntity<List<ObraDTO>>(obraMapper.toListDTO(listaObras), HttpStatus.OK);
 	}
@@ -65,9 +65,9 @@ public class ControllerObra {
 	public ResponseEntity<ObraDTO> atualizar(@PathVariable Long obraId, @Valid @RequestBody ObraInput obraInput){
 		Obra obraToEntidade = obraMapper.toEntidade(obraInput);
 		
-		Obra obraSalva = obraService.atualizar(obraId, obraToEntidade);
+		Obra obraSalva = this.obraService.atualizar(obraId, obraToEntidade);
 		
-		ObraDTO obraDTO = obraMapper.toObraDTO(obraSalva);
+		ObraDTO obraDTO = this.obraMapper.toObraDTO(obraSalva);
 		
 		return new ResponseEntity<ObraDTO>(obraDTO, HttpStatus.OK);
 	}
@@ -83,8 +83,8 @@ public class ControllerObra {
 	@CacheEvict(value = "cache-obra", allEntries = true)
 	@CachePut(value = "cache-obra")
 	public ObraDTO getObra(@PathVariable Long obraId){	
-		Obra obra = obraService.obterObra(obraId);
-		ObraDTO obraDTO = obraMapper.toObraDTO(obra);
+		Obra obra = this.obraService.obterObra(obraId);
+		ObraDTO obraDTO = this.obraMapper.toObraDTO(obra);
 		return obraDTO;
 	}
 	
@@ -92,7 +92,7 @@ public class ControllerObra {
 	@CacheEvict(value = "cache-pesquisa", allEntries = true)
 	@CachePut(value = "cache-pesquisa")
 	public ResponseEntity<List<ObraDTO>> pesquisarPorTitulo(@PathVariable String titulo){
-		List<ObraDTO> listaPesquisada = obraMapper.toListDTO(obraService.pesquisar(titulo));
+		List<ObraDTO> listaPesquisada = this.obraMapper.toListDTO(obraService.pesquisar(titulo));
 		return new ResponseEntity<List<ObraDTO>>(listaPesquisada, HttpStatus.OK);
 	}
 	
