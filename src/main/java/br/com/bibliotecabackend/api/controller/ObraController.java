@@ -88,7 +88,7 @@ public class ObraController {
 		return obraDTO;
 	}
 	
-	@GetMapping(value = "/pesquisa/{titulo}")
+	@GetMapping(value = "/pesquisas/{titulo}")
 	@CacheEvict(value = "cache-pesquisa", allEntries = true)
 	@CachePut(value = "cache-pesquisa")
 	public ResponseEntity<List<ObraDTO>> pesquisarPorTitulo(@PathVariable String titulo){

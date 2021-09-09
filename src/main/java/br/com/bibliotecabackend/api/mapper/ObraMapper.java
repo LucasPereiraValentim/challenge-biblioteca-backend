@@ -26,8 +26,8 @@ public class ObraMapper {
 		return modelMapper.map(obraInput, Obra.class);
 	}
 
-	public List<ObraDTO> toListDTO(Page<Obra> obras) {
-
+	public List<ObraDTO> toListDTO(Page<Obra> obras) {		
+		
 		List<Obra> listaObra = obras.getContent();
 
 		List<ObraDTO> listaObraDTO = new ArrayList<>();

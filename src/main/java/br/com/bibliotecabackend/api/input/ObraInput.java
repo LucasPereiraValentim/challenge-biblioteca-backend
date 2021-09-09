@@ -8,6 +8,8 @@ import javax.validation.constraints.NotBlank;
 
 public class ObraInput {
 	
+	private Long id;
+
 	@NotBlank(message = "título não pode ser nulo ou vázio")
 	private String titulo;
 	
@@ -20,8 +22,6 @@ public class ObraInput {
 	@Valid
 	private List<AutorInput> autores = new ArrayList<>();
 	
-	
-
 	public List<AutorInput> getAutores() {
 		return autores;
 	}
@@ -54,6 +54,12 @@ public class ObraInput {
 		this.foto = foto;
 	}
 	
-	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }
