@@ -54,7 +54,8 @@ public class ObraController {
 	@GetMapping(value = "/")
 	@CacheEvict(value = "cache-obras", allEntries = true)
 	@CachePut(value = "cache-obras")
-	public ResponseEntity<List<ObraDTO>> getObras(@PageableDefault(page = 0, size = 5, sort = "titulo", direction = Direction.ASC) Pageable pageable){
+	public ResponseEntity<List<ObraDTO>> getObras(
+			@PageableDefault(page = 0, size = 5, sort = "titulo", direction = Direction.ASC) Pageable pageable){
 		
 		Page<Obra> listaObras = this.obraService.getListaObra(pageable);
 		
