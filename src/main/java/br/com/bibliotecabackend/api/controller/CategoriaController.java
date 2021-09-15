@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -49,6 +51,8 @@ public class CategoriaController {
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
+	@CacheEvict(value = "cache-categoria", allEntries = true)
+	@CachePut(value = "cache-categoria")
 	public List<CategoriaDTO> getListaCategoria(
 			@PageableDefault(size = 5, direction = Direction.ASC, page = 0, sort = {"nome"}) Pageable pageable){
 		

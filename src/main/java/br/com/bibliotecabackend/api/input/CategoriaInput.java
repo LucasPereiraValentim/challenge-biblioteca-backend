@@ -9,6 +9,7 @@ public class CategoriaInput {
 	@NotBlank(message = "O nome da categoria não pode ser nulo ou ficar em branco")
 	private String nome;	
 	
+	@NotBlank(message = "Id da obra não pode null")
 	private Obra obra;
 	
 	public Obra getObra() {
