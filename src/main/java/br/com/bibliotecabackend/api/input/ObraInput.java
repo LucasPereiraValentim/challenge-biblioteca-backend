@@ -5,9 +5,13 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import br.com.bibliotecabackend.api.input.validation.ValidationGroups;
 
 public class ObraInput {
 	
+	@NotNull(groups = ValidationGroups.obraId.class, message = "Id da obra não pode ser nula")
 	private Long id;
 
 	@NotBlank(message = "título não pode ser nulo ou vázio")
