@@ -1,7 +1,5 @@
 package br.com.bibliotecabackend.api.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,25 +40,21 @@ public class CategoriaController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public CategoriaDTO salvarCategoria(@Valid @RequestBody CategoriaInput categoriaInput) {
 		
-		Categoria categoriaEntidade = this.categoriaMapper.toEntidade(categoriaInput);
+		Categoria categoriaEntidade = this.categoriaMapper.toEntity(categoriaInput);
 		
 		Categoria categoriaSalva = this.categoriaService.salvar(categoriaEntidade);
 		
-		return this.categoriaMapper.tocategoriaDTO(categoriaSalva);
+		return this.categoriaMapper.toDTO(categoriaSalva);
 	}
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	@CacheEvict(value = "cache-categoria", allEntries = true)
 	@CachePut(value = "cache-categoria")
-	public List<CategoriaDTO> getListaCategoria(
+	public Page<CategoriaDTO> getListaCategoria(
 			@PageableDefault(size = 5, direction = Direction.ASC, page = 0, sort = {"nome"}) Pageable pageable){
-		
-		Page<Categoria> pageCategoria = categoriaService.listar(pageable);
-		
-		List<CategoriaDTO> listaCategoria = categoriaMapper.toList(pageCategoria);
-		
-		return listaCategoria;
+		Page<CategoriaDTO> pageCategoria = this.categoriaMapper.toList(this.categoriaService.listar(pageable));	
+		return pageCategoria;
 	}
 	
 }
