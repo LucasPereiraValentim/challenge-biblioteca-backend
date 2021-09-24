@@ -1,7 +1,5 @@
 package br.com.bibliotecabackend.api.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +52,12 @@ public class ObraController {
 	@GetMapping(value = "/")
 	@CacheEvict(value = "cache-obras", allEntries = true)
 	@CachePut(value = "cache-obras")
-	public ResponseEntity<List<ObraDTO>> getObras(
+	public ResponseEntity<Page<ObraDTO>> getObras(
 			@PageableDefault(page = 0, size = 5, sort = "titulo", direction = Direction.ASC) Pageable pageable){
 		
-		Page<Obra> listaObras = this.obraService.getListaObra(pageable);
+		Page<ObraDTO> pageObras = this.obraMapper.toListDTO(this.obraService.getListaObra(pageable));
 		
-		return new ResponseEntity<List<ObraDTO>>(obraMapper.toListDTO(listaObras), HttpStatus.OK);
+		return new ResponseEntity<Page<ObraDTO>>(pageObras, HttpStatus.OK);
 	}
 	
 	@PutMapping(value = "/{obraId}")
@@ -92,9 +90,12 @@ public class ObraController {
 	@GetMapping(value = "/pesquisas/{titulo}")
 	@CacheEvict(value = "cache-pesquisa", allEntries = true)
 	@CachePut(value = "cache-pesquisa")
-	public ResponseEntity<List<ObraDTO>> pesquisarPorTitulo(@PathVariable String titulo){
-		List<ObraDTO> listaPesquisada = this.obraMapper.toListDTO(obraService.pesquisar(titulo));
-		return new ResponseEntity<List<ObraDTO>>(listaPesquisada, HttpStatus.OK);
+	public ResponseEntity<Page<ObraDTO>> pesquisarPorTitulo
+						(@PageableDefault(page = 1, size = 5, sort = "titulo", direction = Direction.ASC) Pageable pageable,
+						@PathVariable String titulo) {
+		Page<ObraDTO> listaDTO = this.obraMapper.toListDTO(this.obraService.pesquisar(titulo.toUpperCase().trim(), pageable));
+		
+		return new ResponseEntity<Page<ObraDTO>>(listaDTO, HttpStatus.OK);
 	}
 	
 }

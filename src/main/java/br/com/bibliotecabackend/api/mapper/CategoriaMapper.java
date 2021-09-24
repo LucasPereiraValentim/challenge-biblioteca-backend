@@ -30,7 +30,7 @@ public class CategoriaMapper {
 	}
 
 
-	public Page<CategoriaDTO> toList(Page<Categoria> pageCategoria) {
+	public Page<CategoriaDTO> toListDTO(Page<Categoria> pageCategoria) {
 		List<CategoriaDTO> listaDTO = pageCategoria.stream().map(this::toDTO).collect(Collectors.toList());
 		return new PageImpl<>(listaDTO);
 	}

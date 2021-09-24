@@ -1,8 +1,8 @@
 package br.com.bibliotecabackend.repository;
 
-import java.util.List;
-
 import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,8 +18,8 @@ public interface ObraRepository extends JpaRepository<Obra, Long>{
 	boolean verificarTitulo(@Param("titulo") String titulo);
 	
 	@ReadOnlyProperty
-	@Query(value = "SELECT o FROM Obra o WHERE o.titulo LIKE %?1%")
-	List<Obra> findLikeByTitulo(String titulo);
+	@Query(value = "SELECT o FROM Obra o WHERE UPPER(TRIM(o.titulo)) LIKE %?1% ORDER BY ?#{#pageable}")
+	Page<Obra> findByTitulo(String titulo, Pageable pageable);
 	
 	
 	

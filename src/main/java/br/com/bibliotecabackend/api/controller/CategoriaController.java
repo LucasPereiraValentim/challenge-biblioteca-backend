@@ -30,7 +30,6 @@ import br.com.bibliotecabackend.service.CategoriaService;
 public class CategoriaController {
 	
 	@Autowired
-	
 	private CategoriaService categoriaService;
 	
 	@Autowired
@@ -53,7 +52,7 @@ public class CategoriaController {
 	@CachePut(value = "cache-categoria")
 	public Page<CategoriaDTO> getListaCategoria(
 			@PageableDefault(size = 5, direction = Direction.ASC, page = 0, sort = {"nome"}) Pageable pageable){
-		Page<CategoriaDTO> pageCategoria = this.categoriaMapper.toList(this.categoriaService.listar(pageable));	
+		Page<CategoriaDTO> pageCategoria = this.categoriaMapper.toListDTO(this.categoriaService.listar(pageable));	
 		return pageCategoria;
 	}
 	

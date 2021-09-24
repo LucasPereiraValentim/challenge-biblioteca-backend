@@ -1,11 +1,12 @@
 package br.com.bibliotecabackend.api.mapper;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
 import br.com.bibliotecabackend.api.dto.ObraDTO;
@@ -26,32 +27,17 @@ public class ObraMapper {
 		return modelMapper.map(obraInput, Obra.class);
 	}
 
-	public List<ObraDTO> toListDTO(Page<Obra> obras) {		
-		
-		List<Obra> listaObra = obras.getContent();
+	public Page<ObraDTO> toListDTO(Page<Obra> obras) {
 
-		List<ObraDTO> listaObraDTO = new ArrayList<>();
+		List<ObraDTO> listaDTO = obras.stream().map(this::toObraDTO).collect(Collectors.toList());
 
-		for (Obra obra : listaObra) {
-			listaObraDTO.add(this.toObraDTO(obra));
-
-		}
-
-		return listaObraDTO;
+		return new PageImpl<>(listaDTO);
 
 	}
-	
-	public List<ObraDTO> toListDTO(List<Obra> obras) {
 
-		List<ObraDTO> listaObraDTO = new ArrayList<>();
-
-		for (Obra obra : obras) {
-			listaObraDTO.add(this.toObraDTO(obra));
-
-		}
-
-		return listaObraDTO;
-
-	}
+//	public List<ObraDTO> toListDTO(List<Obra> obras) {
+//		return obras.stream().map(this::toObraDTO).collect(Collectors.toList());
+//
+//	}
 
 }
