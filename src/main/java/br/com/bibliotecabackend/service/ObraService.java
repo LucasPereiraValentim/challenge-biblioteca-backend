@@ -28,9 +28,7 @@ public class ObraService {
 			throw new TituloException("Já existe uma obra cadastrada com este título");
 		}
 
-		for (int i = 0; i < obra.getAutores().size(); i++) {
-			obra.getAutores().get(i).setObra(obra);
-		}
+		obra.adicionar();
 
 		return obraRepository.save(obra);
 

@@ -30,14 +30,21 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 
 ## Requisitos:
 ### Rotas da aplicação:
-<b>[POST] </b> /obras :  A rota deverá receber titulo, editora, foto, e autores dentro do corpo da requisição. Ao cadastrar um novo projeto, ele deverá ser armazenado dentro de um objeto no seguinte formato: { id: 1, titulo: 'Harry Potter', editora: 'Rocco',foto: 'https://i.imgur.com/UH3IPXw.jpg', autores: ["JK Rowling", "..."]};<br><br>
+<b>[POST] </b> /obras :  A rota deverá receber titulo, editora, foto, e autores dentro do corpo da requisição. Ao cadastrar um novo projeto, ele deverá ser armazenado dentro de um objeto no seguinte formato: { "id": 1, "titulo": "Harry Potter", "editora": "Rocco", "foto": "https://i.imgur.com/UH3IPXw.jpg", "autores": [{"nome:" "JK Rowling"}, {"nome": "..."}];<br><br>
 <b>[GET] </b> /obras/ : A rota deverá listar todas as obras cadastradas<br><br>
 <b>[PUT] </b> /obras/:id: : A rota deverá atualizar as informações de titulo, editora, foto e autores da obra com o id presente nos parâmetros da rota<br><br>
 <b>[DELETE] </b> /obras/:id: : A rota deverá deletar a obra com o id presente nos parâmetros da rota<br>
 
 
 # Techs: 
-- Tecnologia que preferir :)
+* Java 8
+* Spring Boot
+* Spring Security
+* Spring Data
+* Spring Validation
+* PostgreSQL
+* Model Mapper
+* Json Web Token(JWT)
 
 # Como começar:
 1 - Use esse template (clicando em Use this template) ou faça um fork deste repositório com o código inicial<br>
@@ -45,6 +52,14 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 3 - Comece a codar! Sinta-se livre para utilizar o fluxo de trabalho que ache mais confortável<br>
 4 - Compartilhe seu resultado com a comunidade! #devchallenge
 
+
+# Indo além do desafio 
+1 - Implementado camadas para implementação do Spring Security.<br>
+2 - Implementado JWT para realizar autenticação através de TOKEN.<br>
+3 - Implementado cache para os métodos com o verbo http [GET].<br>
+4 - Implementação de novas rotas:<br>
+* <b>[GET] </b> /obras/{🆔} : A rota deverá obter uma única obra pelo seu 🆔<br><br>
+* <b>[GET] </b> /obras/pesquisa/{titulo} : A rota deverá realizar uma pesquisa pelo titulo da obra.<br><br>
 
 # Compartilhe!
 Inicie seu projeto utilizando esse template no seu github como um repositório público<br>

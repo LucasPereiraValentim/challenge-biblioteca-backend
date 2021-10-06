@@ -1,7 +1,7 @@
 package br.com.bibliotecabackend.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,7 +32,7 @@ public class Obra implements Serializable{
 
 	
 	@OneToMany(mappedBy = "obra", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	private List<Autor> autores = new ArrayList<>();
+	private List<Autor> autores = new LinkedList<>();
 	
 	
 	public List<Autor> getAutores() {
@@ -41,6 +41,12 @@ public class Obra implements Serializable{
 
 	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
+	}
+	
+	public void adicionar() {
+		for (int i = 0; i < this.getAutores().size(); i++) {
+			this.getAutores().get(i).setObra(this);
+		}
 	}
 
 
