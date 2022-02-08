@@ -8,7 +8,7 @@ import br.com.bibliotecabackend.api.input.validation.ValidationGroups;
 
 public class CategoriaInput {
 	
-	@NotBlank(message = "O nome da categoria não pode ser nulo ou ficar em branco")
+	@NotBlank(message = "Campo nome da categoria não pode estar vázio")
 	private String nome;
 	
 	@Valid

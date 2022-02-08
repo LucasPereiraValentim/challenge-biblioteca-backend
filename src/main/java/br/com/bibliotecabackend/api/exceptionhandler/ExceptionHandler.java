@@ -54,7 +54,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 	@org.springframework.web.bind.annotation.ExceptionHandler(TituloException.class)
 	public ResponseEntity<Object> handlerTitulo(TituloException e, WebRequest request){
 		
-		HttpStatus status = HttpStatus.BAD_REQUEST;
+		HttpStatus status = HttpStatus.OK;
 		
 		Erro erro = new Erro();
 		erro.setStatus(status.value());

@@ -11,8 +11,6 @@ public class ObraDTO {
 	
 	private String editora;
 	
-	private String foto;
-	
 	private List<AutorDTO> autores = new ArrayList<>();
 	
 	public List<AutorDTO> getAutores() {
@@ -45,14 +43,6 @@ public class ObraDTO {
 
 	public void setEditora(String editora) {
 		this.editora = editora;
-	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
 	}
 	
 	

@@ -14,14 +14,11 @@ public class ObraInput {
 	@NotNull(groups = ValidationGroups.obraId.class, message = "Id da obra não pode ser nula")
 	private Long id;
 
-	@NotBlank(message = "título não pode ser nulo ou vázio")
+	@NotBlank(message = "Campo titulo não pode estar vázio")
 	private String titulo;
 	
-	@NotBlank(message = "Editora não pode ser nula ou vázia")
+	@NotBlank(message = "Campo editora não pode estar vázio")
 	private String editora;
-	
-	@NotBlank(message = "Link para foto não pode ser nulo ou vázio")
-	private String foto;
 	
 	@Valid
 	private List<AutorInput> autores = new ArrayList<>();
@@ -48,14 +45,6 @@ public class ObraInput {
 
 	public void setEditora(String editora) {
 		this.editora = editora;
-	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
 	}
 	
 	public Long getId() {

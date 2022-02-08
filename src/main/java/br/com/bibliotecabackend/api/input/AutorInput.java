@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class AutorInput {
 	
-	@NotBlank
+	@NotBlank(message = "Campo nome do autor não pode estar vázio")
 	private String nome;
 
 	public String getNome() {
