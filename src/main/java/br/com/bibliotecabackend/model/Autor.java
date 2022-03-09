@@ -28,6 +28,14 @@ public class Autor implements Serializable{
 	@JsonIgnore
 	private Obra obra = new Obra();
 
+	public Autor() {
+	
+	}
+	
+	public Autor(String nome) {
+		this.nome = nome;
+	}
+
 
 	public Long getId() {
 		return id;

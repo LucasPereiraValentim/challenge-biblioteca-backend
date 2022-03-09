@@ -18,7 +18,7 @@ public interface ObraRepository extends JpaRepository<Obra, Long>{
 	boolean verificarTitulo(@Param("titulo") String titulo);
 	
 	@ReadOnlyProperty
-	@Query(value = "SELECT o FROM Obra o WHERE UPPER(TRIM(o.titulo)) LIKE %?1% ORDER BY ?#{#pageable}")
+	@Query(value = "SELECT o FROM Obra o WHERE TRIM(o.titulo) LIKE %?1% ORDER BY ?#{#pageable}")
 	Page<Obra> findByTitulo(String titulo, Pageable pageable);
 	
 	

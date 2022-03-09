@@ -27,14 +27,24 @@ public class Obra implements Serializable{
 	private String titulo;
 	
 	private String editora;
-	
-	private String foto;
 
 	
 	@OneToMany(mappedBy = "obra", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<Autor> autores = new LinkedList<>();
 	
 	
+	public Obra() {
+	
+	}
+	
+	public Obra(String titulo, String editora, List<Autor> autores) {
+		this.titulo = titulo;
+		this.editora = editora;
+		this.autores = autores;
+	}
+
+
+
 	public List<Autor> getAutores() {
 		return autores;
 	}
@@ -72,14 +82,6 @@ public class Obra implements Serializable{
 
 	public void setEditora(String editora) {
 		this.editora = editora;
-	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
 	}
 
 	@Override

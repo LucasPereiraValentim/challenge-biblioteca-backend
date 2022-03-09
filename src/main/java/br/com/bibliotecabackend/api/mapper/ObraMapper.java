@@ -35,9 +35,4 @@ public class ObraMapper {
 
 	}
 
-//	public List<ObraDTO> toListDTO(List<Obra> obras) {
-//		return obras.stream().map(this::toObraDTO).collect(Collectors.toList());
-//
-//	}
-
 }
