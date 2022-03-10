@@ -56,8 +56,9 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 # Indo além do desafio 
 1 - Implementado camadas para implementação do Spring Security.<br>
 2 - Implementado JWT para realizar autenticação através de TOKEN.<br>
-3 - Implementado cache para os métodos com o verbo http [GET].<br>
+3 - Implementado cache em alguns endpoints<br>
 4 - Implementação de novas rotas:<br>
+5 - Implementação de testes unitários
 * <b>[GET] </b> /obras/{🆔} : A rota deverá obter uma única obra pelo seu 🆔<br><br>
 * <b>[GET] </b> /obras/pesquisa/{titulo} : A rota deverá realizar uma pesquisa pelo titulo da obra.<br><br>
 
