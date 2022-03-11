@@ -60,7 +60,7 @@ Seu desafio é criar o backend para um sistema de gerenciamento de uma bibliotec
 4 - Implementação de novas rotas:<br>
 5 - Implementação de testes unitários
 * <b>[GET] </b> /obras/{🆔} : A rota deverá obter uma única obra pelo seu 🆔<br><br>
-* <b>[GET] </b> /obras/pesquisa/{titulo} : A rota deverá realizar uma pesquisa pelo titulo da obra.<br><br>
+* <b>[POST] </b> /obras/pesquisa : A rota deverá realizar uma pesquisa pelo titulo da obra.<br><br>
 
 # Compartilhe!
 Inicie seu projeto utilizando esse template no seu github como um repositório público<br>
